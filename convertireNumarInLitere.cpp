@@ -107,14 +107,16 @@ int main() {
 			case 9: strcat(rezultat, "nouazeci ");
 				break;
 		}
-		if ((oglindit / 10 % 10) && (oglindit % 10) && (counter > 6)) strcat(rezultat, "si ");
-		if ((oglindit / 10 % 10) == 0) strcat(rezultat, "milioane ");
+		if (cateCifre(numar) > 7){
+			if (oglindit / 10 % 10) strcat(rezultat, "si ");
+			else strcat(rezultat, "de milioane ");
+		}
 		numar /= 10;
 		oglindit /= 10;
 	}
 	if (numar / 1000000) {
 		bool checking;
-		if (counter == 6) checking = true;
+		if (counter == 7) checking = true;
 		else checking = false;
 
 		switch (checking) {
@@ -189,7 +191,7 @@ int main() {
 			case 9: strcat(rezultat, "noua sute ");
 				break;
 		}
-		if ((oglindit / 10 % 10) == 0 && (oglindit / 100 % 10) == 0) strcat(rezultat, "de mii ");
+		if ((oglindit / 10 % 10) == 0 && (oglindit / 100 % 10) == 0 && cateCifre(numar) <= 6) strcat(rezultat, "de mii ");
 		numar /= 10;
 		oglindit /= 10;
 	}
@@ -260,7 +262,7 @@ int main() {
 				strcat(rezultat, "nouazeci ");
 				break;
 		}
-		if (cateCifre(numar) >= 5){
+		if (cateCifre(numar) == 5 || cateCifre(numar) == 6){
 			if ((oglindit / 10 % 10) == 0) strcat(rezultat, "de mii");
 			if (oglindit / 10 % 10) strcat(rezultat, "si ");
 		}
